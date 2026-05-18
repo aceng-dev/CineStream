@@ -6,8 +6,8 @@ public class FilmApi {
     private String ringkasan;
     private String gambar_poster;
     private String gambar_sampul;
-    private long tanggal_rilis;
-    private int skor_rating;
+    private String tanggal_rilis;
+    private double skor_rating;
     private String kategori;
     private String url_trailer;
 
@@ -32,11 +32,11 @@ public class FilmApi {
         return gambar_sampul;
     }
 
-    public long getTanggalRilis() {
+    public String getTanggalRilis() {
         return tanggal_rilis;
     }
 
-    public int getSkorRating() {
+    public double getSkorRating() {
         return skor_rating;
     }
 

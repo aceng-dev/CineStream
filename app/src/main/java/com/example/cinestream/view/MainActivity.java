@@ -1,26 +1,59 @@
 package com.example.cinestream.view;
 
+import com.example.cinestream.R;
 import android.os.Bundle;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.Fragment;
 
-import com.example.cinestream.R;
+import com.example.cinestream.fragment.JelajahFragment;
+import com.example.cinestream.fragment.WatchlistFragment;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
+
+    BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+
+        bottomNavigationView =
+                findViewById(R.id.bottomNavigation);
+
+        // Fragment awal
+        replaceFragment(new JelajahFragment());
+
+        bottomNavigationView
+                .setOnItemSelectedListener(item -> {
+
+                    if (item.getItemId() == R.id.nav_jelajah) {
+
+                        replaceFragment(
+                                new JelajahFragment()
+                        );
+
+                    } else if (item.getItemId()
+                            == R.id.nav_watchlist) {
+
+                        replaceFragment(
+                                new WatchlistFragment()
+                        );
+                    }
+
+                    return true;
+                });
+    }
+
+    private void replaceFragment(Fragment fragment) {
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(
+                        R.id.fragment_container,
+                        fragment
+                )
+                .commit();
     }
 }
