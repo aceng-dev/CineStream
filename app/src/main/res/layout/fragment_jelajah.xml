@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    FILE: fragment_jelajah.xml
+    LOKASI: res/layout/fragment_jelajah.xml
+    FUNGSI: Layout halaman Jelajah (daftar film dari API)
+    SINKRON DENGAN: JelajahFragment.java (ID View harus sama persis)
+-->
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0F0F0F">
+
+    <!-- ============================================================ -->
+    <!-- LOADING SPINNER                                               -->
+    <!-- Tampil saat menunggu respon dari API Dosen                   -->
+    <!-- Dikontrol di JelajahFragment: tampilkanLoading(true/false)   -->
+    <!-- ============================================================ -->
+    <ProgressBar
+        android:id="@+id/progressBarJelajah"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:indeterminateTint="#E50914"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- ============================================================ -->
+    <!-- RECYCLERVIEW - Daftar film dari API                          -->
+    <!-- Diisi oleh FilmAdapter dengan data List<FilmApi>             -->
+    <!-- Tiap item tampil menggunakan layout item_film.xml            -->
+    <!-- ============================================================ -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerJelajah"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        android:paddingVertical="8dp"
+        android:clipToPadding="false"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- ============================================================ -->
+    <!-- LAYOUT ERROR - Muncul jika koneksi/server gagal             -->
+    <!-- Berisi ikon, teks pesan error, dan tombol "Coba Lagi"       -->
+    <!-- ============================================================ -->
+    <LinearLayout
+        android:id="@+id/layoutErrorJelajah"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:visibility="gone"
+        android:padding="24dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Ikon sinyal putus -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="📡"
+            android:textSize="48sp"/>
+
+        <!-- Teks utama error -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Gagal memuat film"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+
+        <!-- Detail pesan error dari FilmController.onFailure() -->
+        <TextView
+            android:id="@+id/txtPesanErrorJelajah"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="Pesan error tampil di sini"
+            android:textColor="#888888"
+            android:textSize="13sp"
+            android:gravity="center"/>
+
+        <!-- Tombol Coba Lagi → memanggil ambilDataDariApi() lagi -->
+        <TextView
+            android:id="@+id/btnCobaLagiJelajah"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="⟳  Coba Lagi"
+            android:textColor="#E50914"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:padding="12dp"
+            android:background="@drawable/bg_tag_kategori"/>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

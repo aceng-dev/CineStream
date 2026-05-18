@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    FILE: menu_bottom_nav.xml
+    LOKASI: res/menu/menu_bottom_nav.xml  ← buat folder "menu" dulu jika belum ada
+    FUNGSI: Item tab untuk BottomNavigationView di activity_main.xml
+-->
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Tab 1: Jelajah (Film dari API Online) -->
+    <item
+        android:id="@+id/nav_jelajah"
+        android:icon="@android:drawable/ic_menu_compass"
+        android:title="Jelajah"/>
+
+    <!-- Tab 2: Watchlist (Film di SQLite Lokal HP) -->
+    <item
+        android:id="@+id/nav_watchlist"
+        android:icon="@android:drawable/ic_menu_recent_history"
+        android:title="Watchlist"/>
+
+</menu>

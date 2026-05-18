@@ -5,7 +5,6 @@ import android.os.Looper;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.example.cinestream.model.FilmApi;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -16,6 +15,8 @@ import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+
+import com.example.cinestream.model.FilmApi;
 
 public class FilmController {
 

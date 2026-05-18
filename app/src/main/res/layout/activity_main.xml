@@ -1,19 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--
+    FILE: activity_main.xml (UPDATE dari versi sebelumnya)
+    LOKASI: res/layout/activity_main.xml
+    FUNGSI: Layout utama app. RecyclerView lama diganti dengan
+            FragmentContainerView agar bisa navigasi antar Fragment.
+
+    PERUBAHAN dari versi lama:
+    - RecyclerView (recyclerFilm) → DIHAPUS
+    - Ditambah: FrameLayout (fragmentContainer) sebagai wadah Fragment
+    - Ditambah: BottomNavigationView untuk pindah tab Jelajah ↔ Watchlist
+-->
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.MainActivity">
+    android:background="#0F0F0F">
 
+    <!-- JUDUL APLIKASI (tetap dari versi lama) -->
     <TextView
+        android:id="@+id/txtTitleApp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:text="CineStream"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_margin="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <!--
+        FRAGMENT CONTAINER
+        Wadah tempat JelajahFragment dan WatchlistFragment tampil bergantian.
+        ID "fragmentContainer" dipakai di JelajahFragment.java untuk navigasi:
+        requireActivity().getSupportFragmentManager()
+            .beginTransaction()
+            .replace(R.id.fragmentContainer, detailFragment)
+    -->
+    <FrameLayout
+        android:id="@+id/fragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/txtTitleApp"
+        app:layout_constraintBottom_toTopOf="@id/bottomNav"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!--
+        BOTTOM NAVIGATION
+        Tab bawah: Jelajah (API Online) dan Watchlist (SQLite Lokal)
+        Butuh file: res/menu/menu_bottom_nav.xml (lihat catatan di bawah)
+    -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#1C1C1C"
+        app:menu="@menu/menu_bottom_nav"
+        app:itemIconTint="#E50914"
+        app:itemTextColor="#FFFFFF"
+        app:labelVisibilityMode="labeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
