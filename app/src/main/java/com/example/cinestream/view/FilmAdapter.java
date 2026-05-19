@@ -90,6 +90,23 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmViewHolder
         holder.txtRating.setText(String.valueOf(film.getSkorRating()));
 
         // ---------------------------------------------------
+        // TAMPILKAN STATUS NONTON (LOKAL)
+        // ---------------------------------------------------
+        if (dbHelper.isFilmInWatchlist(film.getId())) {
+            int status = dbHelper.getWatchlistStatus(film.getId());
+            if (status == 1) {
+                holder.txtStatusNonton.setVisibility(View.VISIBLE);
+                holder.txtStatusNonton.setText("✓ Ditonton");
+            } else {
+                holder.txtStatusNonton.setVisibility(View.VISIBLE);
+                holder.txtStatusNonton.setText("+ Watchlist");
+                holder.txtStatusNonton.setTextColor(context.getResources().getColor(android.R.color.darker_gray));
+            }
+        } else {
+            holder.txtStatusNonton.setVisibility(View.GONE);
+        }
+
+        // ---------------------------------------------------
         // LOAD GAMBAR POSTER dengan GLIDE
         // Mengambil URL dari FilmApi.getGambarPoster()
         // Glide otomatis: download → cache → tampil ke ImageView
@@ -123,7 +140,8 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmViewHolder
                 boolean berhasil = dbHelper.addToWatchlist(
                         film.getId(),
                         film.getJudul(),
-                        film.getGambarPoster()
+                        film.getGambarPoster(),
+                        film.getUrlTrailer() // Tambahkan trailer di sini
                 );
 
                 if (berhasil) {
@@ -165,6 +183,7 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmViewHolder
         TextView txtJudul;
         TextView txtKategori;
         TextView txtRating;
+        TextView txtStatusNonton; // Tambah ini
 
         public FilmViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -172,6 +191,7 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmViewHolder
             txtJudul     = itemView.findViewById(R.id.txtJudul);     // Judul film
             txtKategori  = itemView.findViewById(R.id.txtKategori);  // Kategori/genre
             txtRating    = itemView.findViewById(R.id.txtRating);    // Skor rating
+            txtStatusNonton = itemView.findViewById(R.id.txtStatusNonton); // Status nonton
         }
     }
 }

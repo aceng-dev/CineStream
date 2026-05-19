@@ -159,6 +159,7 @@ public class JelajahFragment extends Fragment {
         bundle.putString("film_kategori", film.getKategori());
         bundle.putDouble("film_rating",      film.getSkorRating());
         bundle.putString("film_rilis",      film.getTanggalRilis());
+        bundle.putString("film_trailer",    film.getUrlTrailer()); // Tambahkan ini
 
         // Navigasi ke DetailFilmFragment
         // Ganti "DetailFilmFragment" dengan nama class detail yang dibuat tim nanti

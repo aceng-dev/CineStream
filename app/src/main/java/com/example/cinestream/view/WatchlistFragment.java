@@ -67,6 +67,7 @@ public class WatchlistFragment extends Fragment {
                 f.setId(map.get(DatabaseHelper.COL_ID_FILM_API));
                 f.setJudul(map.get(DatabaseHelper.COL_JUDUL));
                 f.setGambarPoster(map.get(DatabaseHelper.COL_GAMBAR_POSTER));
+                f.setUrlTrailer(map.get(DatabaseHelper.COL_URL_TRAILER)); // Ambil Trailer dari DB
                 // Data lain bisa disesuaikan jika perlu
                 listFilm.add(f);
             }
@@ -89,6 +90,7 @@ public class WatchlistFragment extends Fragment {
         bundle.putString("film_kategori", film.getKategori());
         bundle.putDouble("film_rating",      film.getSkorRating());
         bundle.putString("film_rilis",      film.getTanggalRilis());
+        bundle.putString("film_trailer",    film.getUrlTrailer()); // Kirim Trailer ke Detail
 
         DetailFilmFragment detailFragment = new DetailFilmFragment();
         detailFragment.setArguments(bundle);

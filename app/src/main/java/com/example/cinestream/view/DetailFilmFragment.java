@@ -39,6 +39,7 @@ public class DetailFilmFragment extends Fragment {
             String ringkasan = bundle.getString("film_ringkasan");
             String tanggal = bundle.getString("film_rilis");
             String poster = bundle.getString("film_poster");
+            String urlTrailer = bundle.getString("film_trailer"); // Ambil URL Trailer
 
             // 🔥 HUBUNGKAN KE VIEW
             TextView txtJudul = view.findViewById(R.id.txtJudul);
@@ -47,6 +48,7 @@ public class DetailFilmFragment extends Fragment {
             ImageView imgFilm = view.findViewById(R.id.imgFilm);
             
             Button btnTambah = view.findViewById(R.id.btnTambahWatchlist);
+            Button btnTonton = view.findViewById(R.id.btnTontonTrailer); // Hubungkan tombol trailer
             Button btnHapus = view.findViewById(R.id.btnHapusWatchlist);
             android.widget.CheckBox cbSudahNonton = view.findViewById(R.id.cbSudahNonton);
 
@@ -65,12 +67,27 @@ public class DetailFilmFragment extends Fragment {
 
             // 🔥 LOGIKA TOMBOL TAMBAH
             btnTambah.setOnClickListener(v -> {
-                boolean berhasil = dbHelper.addToWatchlist(idApi, judul, poster);
+                boolean berhasil = dbHelper.addToWatchlist(idApi, judul, poster, urlTrailer);
                 if (berhasil) {
                     Toast.makeText(getContext(), "Berhasil ditambah!", Toast.LENGTH_SHORT).show();
                     updateUIWatchlist(idApi, btnTambah, btnHapus, cbSudahNonton);
                 } else {
                     Toast.makeText(getContext(), "Film sudah ada di Watchlist", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            // 🔥 LOGIKA TOMBOL TONTON TRAILER
+            btnTonton.setOnClickListener(v -> {
+                if (urlTrailer != null && !urlTrailer.isEmpty()) {
+                    try {
+                        android.content.Intent intent = new android.content.Intent(android.content.Intent.ACTION_VIEW);
+                        intent.setData(android.net.Uri.parse(urlTrailer));
+                        startActivity(intent);
+                    } catch (Exception e) {
+                        Toast.makeText(getContext(), "URL tidak valid atau tidak bisa dibuka", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(getContext(), "Trailer tidak tersedia", Toast.LENGTH_SHORT).show();
                 }
             });
 
