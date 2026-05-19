@@ -56,6 +56,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     // 🟢 [C] CREATE - Menambah film ke Watchlist lokal HP
     public boolean addToWatchlist(String idApi, String judul, String poster) {
+        if (isFilmInWatchlist(idApi)) {
+            return false; // Sudah ada, jangan tambah lagi
+        }
+
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
@@ -68,6 +72,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         long hasil = db.insert(TABLE_WATCHLIST, null, values);
         db.close();
         return hasil != -1; // Kalau -1 artinya gagal, kalau sukses return true
+    }
+
+    // Fungsi tambahan untuk mengecek apakah film sudah ada di Watchlist
+    public boolean isFilmInWatchlist(String idApi) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE_WATCHLIST + " WHERE " + COL_ID_FILM_API + " = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{idApi});
+        boolean exists = cursor.getCount() > 0;
+        cursor.close();
+        return exists;
     }
 
     // 🔵 [R] READ - Mengambil semua film yang ada di Watchlist HP
@@ -96,22 +110,33 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    public boolean updateWatchlist(String idLokal, int statusNonton, String catatan) {
+    // Mendapatkan status nonton berdasarkan ID API
+    public int getWatchlistStatus(String idApi) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT " + COL_STATUS_NONTON + " FROM " + TABLE_WATCHLIST + " WHERE " + COL_ID_FILM_API + " = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{idApi});
+        int status = 0;
+        if (cursor.moveToFirst()) {
+            status = cursor.getInt(0);
+        }
+        cursor.close();
+        return status;
+    }
+
+    public boolean updateWatchlistStatus(String idApi, int statusNonton) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-
         values.put(COL_STATUS_NONTON, statusNonton);
-        values.put(COL_CATATAN_USER, catatan);
 
-        int hasil = db.update(TABLE_WATCHLIST, values, COL_ID_LOKAL + " = ?", new String[]{idLokal});
+        int hasil = db.update(TABLE_WATCHLIST, values, COL_ID_FILM_API + " = ?", new String[]{idApi});
         db.close();
         return hasil > 0;
     }
 
 
-    public boolean deleteFromWatchlist(String idLokal) {
+    public boolean deleteFromWatchlistByApiId(String idApi) {
         SQLiteDatabase db = this.getWritableDatabase();
-        int hasil = db.delete(TABLE_WATCHLIST, COL_ID_LOKAL + " = ?", new String[]{idLokal});
+        int hasil = db.delete(TABLE_WATCHLIST, COL_ID_FILM_API + " = ?", new String[]{idApi});
         db.close();
         return hasil > 0;
     }

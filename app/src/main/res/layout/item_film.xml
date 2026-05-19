@@ -103,6 +103,18 @@
                     android:textColor="#CCCCCC"
                     android:textSize="13sp"/>
 
+                <!-- STATUS NONTON (LOKAL) -->
+                <TextView
+                    android:id="@+id/txtStatusNonton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:text="✓ Ditonton"
+                    android:textColor="#00FF00"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    android:visibility="gone"/>
+
             </LinearLayout>
 
         </LinearLayout>

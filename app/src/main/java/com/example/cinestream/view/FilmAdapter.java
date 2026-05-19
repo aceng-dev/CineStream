@@ -114,25 +114,24 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmViewHolder
 
         // ---------------------------------------------------
         // KLIK TAHAN (Long Press) → Tambah ke Watchlist langsung
-        // Menggunakan DatabaseHelper.addToWatchlist() milik tim
         // ---------------------------------------------------
         holder.itemView.setOnLongClickListener(v -> {
-            boolean berhasil = dbHelper.addToWatchlist(
-                    film.getId(),          // id_film_api → kolom COL_ID_FILM_API
-                    film.getJudul(),       // judul       → kolom COL_JUDUL
-                    film.getGambarPoster() // poster      → kolom COL_GAMBAR_POSTER
-            );
-
-            if (berhasil) {
-                Toast.makeText(context,
-                        "\"" + film.getJudul() + "\" ditambahkan ke Watchlist ✓",
-                        Toast.LENGTH_SHORT).show();
+            // Cek dulu apakah sudah ada
+            if (dbHelper.isFilmInWatchlist(film.getId())) {
+                Toast.makeText(context, "Film ini sudah ada di Watchlist", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(context,
-                        "Gagal menambahkan ke Watchlist",
-                        Toast.LENGTH_SHORT).show();
+                boolean berhasil = dbHelper.addToWatchlist(
+                        film.getId(),
+                        film.getJudul(),
+                        film.getGambarPoster()
+                );
+
+                if (berhasil) {
+                    Toast.makeText(context, "\"" + film.getJudul() + "\" berhasil ditambah ✓", Toast.LENGTH_SHORT).show();
+                    notifyItemChanged(position); // Refresh item ini untuk update UI (jika ada indikator)
+                }
             }
-            return true; // true = event sudah ditangani, tidak diteruskan
+            return true;
         });
     }
 

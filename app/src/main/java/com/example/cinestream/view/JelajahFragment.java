@@ -87,6 +87,15 @@ public class JelajahFragment extends Fragment {
 
         // --- 5. Tombol "Coba Lagi" jika gagal koneksi ---
         btnCobaTampil.setOnClickListener(v -> ambilDataDariApi());
+
+        // --- 6. FAB Tambah Film Baru ---
+        view.findViewById(R.id.fabTambahFilm).setOnClickListener(v -> {
+            requireActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragmentContainer, new TambahFilmFragment())
+                    .addToBackStack(null)
+                    .commit();
+        });
     }
 
     // ================================================================

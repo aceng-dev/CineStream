@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
                 fragmentTerpilih = new JelajahFragment();
 
             } else if (item.getItemId() == R.id.nav_watchlist) {
-                fragmentTerpilih = new JelajahFragment(); // sementara
+                fragmentTerpilih = new WatchlistFragment();
             }
 
             if (fragmentTerpilih != null) {

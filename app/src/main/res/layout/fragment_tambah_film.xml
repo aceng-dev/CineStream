@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0F0F0F">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tambah Film Baru ke API"
+            android:textColor="#FFFFFF"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="24dp"/>
+
+        <!-- INPUT JUDUL -->
+        <EditText
+            android:id="@+id/editJudul"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Judul Film"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#888888"
+            android:backgroundTint="#E50914"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- INPUT RINGKASAN -->
+        <EditText
+            android:id="@+id/editRingkasan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ringkasan/Deskripsi"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#888888"
+            android:backgroundTint="#E50914"
+            android:layout_marginBottom="16dp"
+            android:inputType="textMultiLine"
+            android:lines="3"/>
+
+        <!-- INPUT URL POSTER -->
+        <EditText
+            android:id="@+id/editPoster"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="URL Gambar Poster"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#888888"
+            android:backgroundTint="#E50914"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- INPUT URL SAMPUL -->
+        <EditText
+            android:id="@+id/editSampul"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="URL Gambar Sampul"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#888888"
+            android:backgroundTint="#E50914"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- INPUT TANGGAL RILIS -->
+        <EditText
+            android:id="@+id/editRilis"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Tanggal Rilis (Contoh: 2024-01-01)"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#888888"
+            android:backgroundTint="#E50914"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- INPUT KATEGORI -->
+        <EditText
+            android:id="@+id/editKategori"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Kategori (Action, Drama, dll)"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#888888"
+            android:backgroundTint="#E50914"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- INPUT RATING -->
+        <EditText
+            android:id="@+id/editRating"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Skor Rating (Contoh: 8.5)"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#888888"
+            android:backgroundTint="#E50914"
+            android:layout_marginBottom="16dp"
+            android:inputType="numberDecimal"/>
+
+        <!-- INPUT URL TRAILER -->
+        <EditText
+            android:id="@+id/editTrailer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="URL Trailer (Youtube)"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#888888"
+            android:backgroundTint="#E50914"
+            android:layout_marginBottom="16dp"/>
+
+        <Button
+            android:id="@+id/btnSimpanKeApi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="#E50914"
+            android:text="SIMPAN KE SERVER API"
+            android:textColor="#FFFFFF" />
+
+    </LinearLayout>
+</ScrollView>
